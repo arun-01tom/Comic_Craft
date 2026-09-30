@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ComicCraft — AI Comic Story Creator</title>
+  <link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}">
+</head>
+<body class="landing">
+  <main class="shell">
+    <section class="hero">
+      <span class="eyebrow">AI COMIC STORY CREATOR</span>
+      <h1>Turn one idea into a five-panel comic.</h1>
+      <p>Describe your story, choose the mood and art direction, and ComicCraft creates the outline, narration, dialogue, illustrations, and PDF.</p>
+    </section>
+
+    {% if error %}<div class="alert">{{ error }}</div>{% endif %}
+
+    <form class="card form-card" action="/generate" method="post">
+      <label>Story prompt
+        <textarea name="story_prompt" maxlength="{{ settings.max_story_prompt_chars }}" required placeholder="A brave fox exploring an enchanted forest..."></textarea>
+      </label>
+
+      <div class="grid two">
+        <label>Main character name
+          <input name="character_name" required value="Ember" placeholder="Ember">
+        </label>
+        <label>Setting
+          <select name="setting">
+            <option>Enchanted forest</option>
+            <option>School</option>
+            <option>Space station</option>
+            <option>Futuristic city</option>
+            <option>Underwater kingdom</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="grid two">
+        <label>Story tone
+          <select name="tone">
+            <option>light-hearted</option>
+            <option>dramatic</option>
+            <option>poetic</option>
+            <option>funny</option>
+          </select>
+        </label>
+        <label>Art style
+          <select name="art_style">
+            <option>comic book</option>
+            <option>anime</option>
+            <option>pixel art</option>
+            <option>realistic</option>
+          </select>
+        </label>
+      </div>
+
+      <button class="primary" type="submit">Create My Comic ✦</button>
+      <p class="hint">Generation can take several minutes because it calls text and image AI services.</p>
+    </form>
+  </main>
+</body>
+</html>
